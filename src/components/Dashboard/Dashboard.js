@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import APIKeysList from './APIKeysList';
 import PaymentInfo from './PaymentInfo';
 import LoadingIndicator from '../LoadingIndicator';
+import FeedbackButton from './FeedbackButton';
 import { getDashboardData } from './api';
 
 function useAPIKeysAndUserData() {
@@ -48,12 +49,13 @@ export default function Dashboard() {
   return(
     <TriggerRefreshContext.Provider value={triggerRefresh}>
       <div id="wrapper">
-      <DashboardNavbar apikeys={apiKeys} />
+        <DashboardNavbar apikeys={apiKeys} />
         <Container>
           <Stats apiKeys={apiKeys.length} enabledApiKeys={enabledApiKeys} totalWeeklyCreditUsage={totalWeeklyCreditUsage} freeCreditsRemaining={freeCreditsRemaining} />
           <APIKeysList apiKeys={apiKeys}/>
           <PaymentInfo userData={userData}/>
         </Container>
+        <FeedbackButton></FeedbackButton>
       </div>
     </TriggerRefreshContext.Provider>
   );

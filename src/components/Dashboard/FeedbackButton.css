@@ -1,0 +1,15 @@
+.feedback-button {
+    position: fixed;
+    top: 100%;
+    right: 0;
+    margin-top: -2em;
+    margin-right: 0.42em;
+    font-size: 3.2rem;
+    cursor: pointer;
+    transition: transform .42s;
+    z-index: 1;
+}
+
+.feedback-button:hover {
+    transform: scale(1.5);
+}
