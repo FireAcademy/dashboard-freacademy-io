@@ -26,7 +26,7 @@ export default function PaymentSuccess() {
           <h1 className="text-center h3 mt-3 mb-4 font-weight-normal">Thank you!</h1>
 
           <p className="text-center mb-3">
-            Your subscription has been activated. We can't wait to see the great things that you'll build!
+            Your subscription has been activated. We can't wait to see the great things that you are going to build!
           </p>
 
           <p className="text-center mb-3">
