@@ -15,6 +15,7 @@ import VerifyEmail from './components/VerifyEmail';
 import LoadingIndicator from './components/LoadingIndicator';
 import ForgotPassword from './components/ForgotPassword';
 import PaymentSuccess from './components/PaymentSuccess';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const auth = getAuth();
@@ -61,6 +62,7 @@ function App() {
 
   return (
     <div className="wrapper">
+      <Toaster position="top-center"/>
       <BrowserRouter>
         <Routes>
           <Route exact path="/dashboard" element={<Dashboard />}></Route>

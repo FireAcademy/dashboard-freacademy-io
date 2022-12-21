@@ -7,6 +7,7 @@ import Alert from 'react-bootstrap/Alert';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import { createTicket } from './api';
+import toast from 'react-hot-toast';
 
 export default function FeedbackModal(props) {
   const [loading, setLoading] = useState(false);
@@ -58,6 +59,7 @@ export default function FeedbackModal(props) {
       setFeeling('');
       setEmotionalStateRadioValue(0);
       props.onHide();
+      toast.success('Your message has been recorded.');
     }
   }
 

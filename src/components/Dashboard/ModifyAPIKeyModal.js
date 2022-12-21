@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import { updateAPIKey } from './api';
 import { TriggerRefreshContext } from "./Dashboard";
+import toast from 'react-hot-toast';
 
 export default function ModifyAPIKeyModal(props) {
   const [loading, setLoading] = useState(false);
@@ -58,6 +59,7 @@ export default function ModifyAPIKeyModal(props) {
       setInitialized(false);
       refreshData();
       props.onHide();
+      toast.success('API key modified.');
     }
   }
 

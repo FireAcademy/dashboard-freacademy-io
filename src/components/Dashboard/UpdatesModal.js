@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import { getUpdates, acknowledgeUpdates } from './api';
+import toast from 'react-hot-toast';
 
 export default function UpdatesModal() {
   const [loading, setLoading] = useState(false);
@@ -34,6 +35,7 @@ export default function UpdatesModal() {
         
     setLoading(false);
     setShowModal(false);
+    toast.success('Updates acknowledged.');
   }
 
   return (
@@ -53,15 +55,15 @@ export default function UpdatesModal() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <center class="h4 mb-4">Updates From the FireAcademy.io Team</center>
+            <center className="h4 mb-4">Updates From the FireAcademy.io Team</center>
             {(updates ?? []).map(update => (
-              <Card className="mt-2">
+              <Card key={update.title} className="mt-2">
                 <Card.Body>
                   <Card.Title className="text-center">{update.name}</Card.Title>
                   <Card.Subtitle className="text-center">{update.title}</Card.Subtitle>
-                  <Card.Text class="mt-3">
+                  <Card.Text className="mt-3">
                     {update.description}{' '}
-                    <Card.Link href={update.learn_more_link} class="mb-4">Learn More</Card.Link>
+                    <Card.Link href={update.learn_more_link} className="mb-4">Learn More</Card.Link>
                   </Card.Text>
                 </Card.Body>
               </Card>
