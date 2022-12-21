@@ -17,12 +17,7 @@ export default function FeedbackModal(props) {
   const [contactByEmail, setContactByEmail] = useState(true);
   const [contactInfo, setContactInfo] = useState('');
 
-  const emotionalStates = [
-    ['Excited', 'outline-success'],
-    ['Confused', 'outline-primary'],
-    ['Angry', 'outline-danger'],
-    ['Other', 'outline-dark']
-  ];
+  const emotionalStates = [ 'Excited', 'Confused', 'Angry', 'Other' ];
 
   const [emotionalStateRadioValue, setEmotionalStateRadioValue] = useState(0);
 
@@ -42,7 +37,7 @@ export default function FeedbackModal(props) {
         message: message,
         emotional_state:
           emotionalStateRadioValue === emotionalStates.length - 1 ?
-            ("Other: " + feeling) : emotionalStates[emotionalStateRadioValue][0],
+            ("Other: " + feeling) : emotionalStates[emotionalStateRadioValue],
         uid: submitAnonymously ? null : uid,
         contact: !submitAnonymously && okToContact ?
           (contactByEmail ? ("Email: " + email) : contactInfo): null,
@@ -113,12 +108,12 @@ export default function FeedbackModal(props) {
         
           <Form.Label className="mt-4">How are you feeling?</Form.Label>
           <br/><ButtonGroup className="mb-2 d-flex">
-          {emotionalStates.map(([text, variant], index) => (
+          {emotionalStates.map((text, index) => (
             <ToggleButton
                 key={text}
                 id={`radio-${text}`}
                 type="radio"
-                variant={variant}
+                variant="outline-primary"
                 name="radio"
                 value={index.toString()}
                 checked={index === emotionalStateRadioValue}
@@ -179,7 +174,7 @@ export default function FeedbackModal(props) {
         </>}
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={props.onHide} variant="outline-secondary" disabled={loading}>Keep Silent</Button>
+          <Button onClick={props.onHide} variant="outline-secondary" disabled={loading}>Abort</Button>
           <Button type="submit" disabled={loading}>Send</Button>
         </Modal.Footer>
       </Form>

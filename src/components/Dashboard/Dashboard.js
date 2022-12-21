@@ -7,6 +7,7 @@ import PaymentInfo from './PaymentInfo';
 import LoadingIndicator from '../LoadingIndicator';
 import FeedbackButton from './FeedbackButton';
 import { getDashboardData } from './api';
+import UpdatesModal from './UpdatesModal';
 
 function useAPIKeysAndUserData() {
   const [theSwtich, setTheSwitch] = useState(true);
@@ -56,6 +57,7 @@ export default function Dashboard() {
           <PaymentInfo userData={userData}/>
         </Container>
         <FeedbackButton></FeedbackButton>
+        <UpdatesModal></UpdatesModal>
       </div>
     </TriggerRefreshContext.Provider>
   );
