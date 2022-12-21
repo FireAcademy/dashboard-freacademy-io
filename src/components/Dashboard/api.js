@@ -88,3 +88,44 @@ export async function redeemGiftCode(code, apiKey) {
         })
       }).then(response => response.json());
 }
+
+export async function getUpdates() {
+  const token = await getAuth().currentUser.getIdToken();
+
+  return fetch(API_BASE_URL + "updates", {
+      method: 'GET',
+      headers: {
+        "Authorization": token
+      }
+    }).then(response => response.json());
+}
+
+export async function acknowledgeUpdates() {
+  const token = await getAuth().currentUser.getIdToken();
+
+  return fetch(API_BASE_URL + "updates", {
+      method: 'POST',
+      headers: {
+        'Authorization': token,
+      },
+    }).then(response => response.json());
+}
+
+export async function createTicket(message, emotionalState, anonymous, contact) {
+  const token = await getAuth().currentUser.getIdToken();
+
+  return fetch(API_BASE_URL + "ticket", {
+      method: 'POST',
+      headers: {
+        'Authorization': token,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          message,
+          anonymous,
+          contact,
+          emotional_state: emotionalState
+      })
+    }).then(response => response.json());
+}

@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
+import { createTicket } from './api';
 
 export default function FeedbackModal(props) {
   const [loading, setLoading] = useState(false);
@@ -30,21 +31,14 @@ export default function FeedbackModal(props) {
     let error = '';
     try {
       const currentUser = getAuth().currentUser;
-      const uid = currentUser.uid;
       const email = currentUser.email;
       
-      const requestBody = {
-        message: message,
-        emotional_state:
-          emotionalStateRadioValue === emotionalStates.length - 1 ?
-            ("Other: " + feeling) : emotionalStates[emotionalStateRadioValue],
-        uid: submitAnonymously ? null : uid,
-        contact: !submitAnonymously && okToContact ?
-          (contactByEmail ? ("Email: " + email) : contactInfo): null,
-      };
-      console.log(requestBody);
-
-      const res = {success: true, message: ""}
+      const emotionalState = emotionalStateRadioValue === emotionalStates.length - 1 ?
+        ("Other: " + feeling) : emotionalStates[emotionalStateRadioValue];
+      const contact = !submitAnonymously && okToContact ?
+          (contactByEmail ? ("Email: " + email) : contactInfo): null;
+      
+      const res = await createTicket(message, emotionalState, submitAnonymously, contact);
       
       if(res.message) {
         error = res.message;
@@ -87,12 +81,6 @@ export default function FeedbackModal(props) {
           {error !== '' &&
             <Alert variant='danger'>
               {error}
-            </Alert>
-          }
-
-          {loading &&
-            <Alert variant='info'>
-              Sending feedback...
             </Alert>
           }
 
