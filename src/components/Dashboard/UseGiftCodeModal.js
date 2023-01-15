@@ -8,11 +8,8 @@ import { redeemGiftCode } from './api';
 import { TriggerRefreshContext } from "./Dashboard";
 
 export default function UseGiftCodeModal(props) {
-  const apiKeys = props.apikeys;
-
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(apiKeys.length === 0 ? 'You have no API keys' : '');
-  const [apiKey, setApiKey] = useState(apiKeys.length > 0 ? apiKeys[0].api_key : '');
+  const [result, setResult] = useState('');
   const [code, setCode] = useState('');
 
   const refreshData = useContext(TriggerRefreshContext);
@@ -25,7 +22,7 @@ export default function UseGiftCodeModal(props) {
     
     let result;
     try {
-      const res = await redeemGiftCode(code, apiKey);
+      const res = await redeemGiftCode(code);
 
       if(res.message) {
         result = res.message;
@@ -73,7 +70,7 @@ export default function UseGiftCodeModal(props) {
 
           {loading &&
             <Alert variant='info'>
-              Generating...
+              Using...
             </Alert>
           }
 
@@ -83,11 +80,6 @@ export default function UseGiftCodeModal(props) {
             <Form.Control type="text" placeholder="9a94fc27-fb32-4b66-b393-88aa00cb73a4" value={code} onChange={e => setCode(e.target.value)} disabled={loading} />
           </FloatingLabel>
 
-          <FloatingLabel label="API Key">
-            <Form.Select value={apiKey} onChange={e => setApiKey(e.target.value)}>
-              {apiKeys.map(key => <option key={key.api_key} value={key.api_key}>{key.name}</option>)}
-            </Form.Select>
-          </FloatingLabel>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={props.onHide} variant="secondary" disabled={loading}>Close</Button>

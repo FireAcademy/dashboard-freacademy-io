@@ -31,7 +31,7 @@ export async function createAPIKey(name, origin, limit) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            weekly_credit_limit: limitInt,
+            monthly_credit_limit: limitInt,
             name, origin
         })
       }).then(response => response.json());
@@ -57,20 +57,63 @@ export async function updateAPIKey(apiKey, name, limit, origin, disabled) {
         body: JSON.stringify({
             api_key: apiKey,
             disabled, origin, name,
-            weekly_credit_limit: limitInt
+            monthly_credit_limit: limitInt
         })
       }).then(response => response.json());
 }
 
-export async function getStripeURL() {
+export async function getStripeDashboardURL() {
     const token = await getAuth().currentUser.getIdToken();
 
-    return fetch(API_BASE_URL + "stripe-url", {
+    return fetch(API_BASE_URL + "stripe-dashboard-url", {
         method: 'GET',
         headers: {
           'Authorization': token,
         },
       }).then(response => response.json());
+}
+
+export async function getPlans() {
+  const token = await getAuth().currentUser.getIdToken();
+
+  return fetch(API_BASE_URL + "plans", {
+      method: 'GET',
+      headers: {
+        'Authorization': token,
+      },
+    }).then(response => response.json());
+}
+
+export async function getSubscribeURL(plan_id) {
+  const token = await getAuth().currentUser.getIdToken();
+
+  return fetch(API_BASE_URL + "subscribe-url", {
+      method: 'POST',
+      headers: {
+        'Authorization': token,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          plan_id,
+      })
+    }).then(response => response.json());
+}
+
+export async function updateUserPlan(plan_id, auto_purchase_credits_packages) {
+  const token = await getAuth().currentUser.getIdToken();
+
+  return fetch(API_BASE_URL + "user-plan", {
+      method: 'POST',
+      headers: {
+        'Authorization': token,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          plan_id, auto_purchase_credits_packages
+      })
+    }).then(response => response.json());
 }
 
 export async function redeemGiftCode(code, apiKey) {

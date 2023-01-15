@@ -29,15 +29,14 @@ export default function APIKeysList({apiKeys}) {
         key={e.api_key}
         name={e.name}
         apiKey={e.api_key}
+        creditLimit={e.monthly_credit_limit}
+        origin={e.origin}
         disabled={e.disabled}
-        creditsUsedThisWeek={e.credits_used_this_week}
-        weeklyCreditLimit={e.weekly_credit_limit}
-        freeCreditsRemaining={e.free_credits_remaining}
         onModify = {() => setModifyAPIKeyModalData({
           name: e.name,
           apiKey: e.api_key,
           disabled: e.disabled,
-          limit: e.weekly_credit_limit,
+          limit: e.monthly_credit_limit,
           origin: e.origin
         })}
       />
@@ -61,10 +60,9 @@ export default function APIKeysList({apiKeys}) {
               <tr>
                 <th>Name</th>
                 <th>API Key</th>
+                <th>Monthly Credit Limit</th>
+                <th>Origin</th>
                 <th>Status</th>
-                <th>Credits Used This Week</th>
-                <th>Weekly Credit Limit</th>
-                <th>Free Credits Remaining</th>
                 <th></th>
               </tr>
             </thead>
@@ -81,7 +79,7 @@ export default function APIKeysList({apiKeys}) {
   );
 }
 
-function APIKeyEntry({name, apiKey, disabled, creditsUsedThisWeek, weeklyCreditLimit, freeCreditsRemaining, onModify}) {
+function APIKeyEntry({name, apiKey, creditLimit, origin, disabled, onModify}) {
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = () => {
@@ -102,12 +100,11 @@ function APIKeyEntry({name, apiKey, disabled, creditsUsedThisWeek, weeklyCreditL
           <Button variant="outline-secondary" size="sm" onClick={() => copyToClipboard()}>{apiKey}</Button>
         </OverlayTrigger>
       </td>
+      <td>{creditLimit}</td>
+      <td>{origin}</td>
       <td>
         <Badge bg={disabled ? 'secondary' : 'success'}>{disabled ? 'DISABLED' : 'ENABLED'}</Badge>
       </td>
-      <td>{creditsUsedThisWeek}</td>
-      <td>{weeklyCreditLimit}</td>
-      <td>{freeCreditsRemaining}</td>
       <td>
         <Button variant="outline-primary" onClick={onModify}>Modify</Button>
       </td>

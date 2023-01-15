@@ -3,7 +3,7 @@ import DashboardNavbar from './DashboardNavbar';
 import Stats from './Stats';
 import Container from 'react-bootstrap/Container';
 import APIKeysList from './APIKeysList';
-import PaymentInfo from './PaymentInfo';
+import PlanInfo from './PlanInfo';
 import LoadingIndicator from '../LoadingIndicator';
 import FeedbackButton from './FeedbackButton';
 import { getDashboardData } from './api';
@@ -50,11 +50,11 @@ export default function Dashboard() {
   const remainingCredits = userData.remaining_credits;
   const planName = planData.name;
   const billingCycleEnd = userData.billing_cycle_end;
-  const extraCreditsEnabled = planData.auto_purchase_credits_packages;
+  const extraCreditsEnabled = userData.auto_purchase_credits_packages;
   return(
     <TriggerRefreshContext.Provider value={triggerRefresh}>
       <div id="wrapper">
-        <DashboardNavbar apikeys={apiKeys} />
+        <DashboardNavbar />
         <Container>
           <Stats
             remainingCredits={remainingCredits}
@@ -64,7 +64,7 @@ export default function Dashboard() {
             extraCreditsEnabled={extraCreditsEnabled}
           />
           <APIKeysList apiKeys={apiKeys}/>
-          <PaymentInfo userData={userData}/>
+          <PlanInfo userData={userData} planData={planData} />
         </Container>
         <FeedbackButton></FeedbackButton>
         <UpdatesModal></UpdatesModal>

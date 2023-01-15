@@ -9,7 +9,7 @@ import { getAuth } from 'firebase/auth';
 import './DashboardNavbar.css';
 import UseGiftCodeModal from './UseGiftCodeModal';
 
-export default function DashboardNavbar({ apikeys }) {
+export default function DashboardNavbar() {
   const auth = getAuth();
   const user = auth.currentUser;
   const [showUseGiftCodeModal, setShowUseGiftCodeModal] = useState(false);
@@ -38,7 +38,7 @@ export default function DashboardNavbar({ apikeys }) {
           {' '}
         </Container>
       </Navbar>
-      <UseGiftCodeModal apikeys={apikeys} show={showUseGiftCodeModal} onHide={() => setShowUseGiftCodeModal(false)} />
+      <UseGiftCodeModal show={showUseGiftCodeModal} onHide={() => setShowUseGiftCodeModal(false)} />
     </>
   );
 }

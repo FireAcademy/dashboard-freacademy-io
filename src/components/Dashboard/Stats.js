@@ -19,7 +19,7 @@ export default function Stats({
 
  const noAPIKeys = apiKeys.length;
  const noAPIKeysEnabled = apiKeys.filter(e => !e.disabled).length;
- const planSubtitle = extraCreditsEnabled ? "credits packets auto-purchased" : "fixed number of credits";
+ const planSubtitle = extraCreditsEnabled ? "credit packages auto-purchased" : "fixed number of credits";
  return (
     <Row>
       <CustomCard title="Remaining Credits" value={remainingCredits} subtitle={"renewal  on " + renewalDate} />
@@ -31,7 +31,7 @@ export default function Stats({
 
 function CustomCard({title, value, subtitle}) {
   return (
-    <Col md={4} lg={4} className="mb-3 mb-lg-5">
+    <Col md={4} lg={4} className="mb-4 mb-lg-4">
       <Card>
         <Card.Body className="text-center">
           <Card.Text className="text-uppercase fs-5 fw-light">{title}</Card.Text>

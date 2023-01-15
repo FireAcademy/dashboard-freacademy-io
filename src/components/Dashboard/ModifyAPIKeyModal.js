@@ -96,7 +96,7 @@ export default function ModifyAPIKeyModal(props) {
             <Form.Control type="text" placeholder="Test API Key" value={name} onChange={e => setName(e.target.value)} disabled={loading} />
           </FloatingLabel>
 
-          <FloatingLabel label="Weekly Credit Limit" className="mt-2 mb-3">
+          <FloatingLabel label="Monthly Credit Limit" className="mt-2 mb-3">
             <Form.Control type="number" placeholder="0" value={limit} onChange={e => setLimit(e.target.value)} disabled={loading} />
           </FloatingLabel>
 
