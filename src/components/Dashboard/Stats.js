@@ -3,12 +3,28 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
-export default function Stats({apiKeys, enabledApiKeys, totalWeeklyCreditUsage, freeCreditsRemaining}) {
+export default function Stats({
+  remainingCredits,
+  billingCycleEnd,
+  apiKeys,
+  plan,
+  extraCreditsEnabled
+}) {
+ const bce = new Date(billingCycleEnd)
+ const renewalDate = bce.toLocaleDateString('en-us', {
+  year: "numeric",
+  month: "short",
+  day: "numeric"
+ });
+
+ const noAPIKeys = apiKeys.length;
+ const noAPIKeysEnabled = apiKeys.filter(e => !e.disabled).length;
+ const planSubtitle = extraCreditsEnabled ? "credits packets auto-purchased" : "fixed number of credits";
  return (
     <Row>
-      <CustomCard title="API Keys" value={apiKeys} subtitle={enabledApiKeys.toString() + " enabled"} />
-      <CustomCard title="Weekly Usage" value={totalWeeklyCreditUsage} subtitle="credits" />
-      <CustomCard title="Free Credits Left" value={freeCreditsRemaining} subtitle="credits" />
+      <CustomCard title="Remaining Credits" value={remainingCredits} subtitle={"renewal  on " + renewalDate} />
+      <CustomCard title="API Keys" value={noAPIKeys} subtitle={`${noAPIKeysEnabled} enabled`} />
+      <CustomCard title="Plan" value={plan} subtitle={planSubtitle} />
     </Row>
   );
 }
