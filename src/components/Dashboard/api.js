@@ -1,6 +1,6 @@
 import { getAuth } from 'firebase/auth';
 
-export const API_BASE_URL = "https://kraken2.fireacademy.io/api/";
+export const API_BASE_URL = "https://kraken.fireacademy.io/api/";
 
 export async function getDashboardData() {
     const token = await getAuth().currentUser.getIdToken();
