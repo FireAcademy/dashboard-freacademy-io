@@ -57,9 +57,9 @@ export default function RegisterForm({signUp}) {
         <p className="mt-4 mb-5 text-muted text-center">
           Already have an account? <Link to="/login">Login</Link> instead. <br/> <br/>
           By signing up, you confirm that you have read and understood FireAcademy's{' '}
-          <a href="https://fireacademy.io/terms-and-conditions">Terms and Conditions</a>,{' '}
-          <a href="https://fireacademy.io/privacy-policy">Privacy Policy</a>, and{' '}
-          <a href="https://fireacademy.io/cookie-policy">Cookie Policy</a>.
+          <a href="https://fireacademy.io/terms-and-conditions.txt">Terms and Conditions</a>,{' '}
+          <a href="https://fireacademy.io/privacy-policy.txt">Privacy Policy</a>, and{' '}
+          <a href="https://fireacademy.io/cookie-policy.txt">Cookie Policy</a>.
         </p>
       </Form>
     </Container>
